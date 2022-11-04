@@ -50,4 +50,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 		}
 	}
 
+	@Override
+	public Optional<Usuario> buscaPorId(Long usuario) {
+		return repository.findById(usuario);
+	}
+
 }

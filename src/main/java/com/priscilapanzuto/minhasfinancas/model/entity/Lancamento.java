@@ -20,12 +20,16 @@ import org.springframework.data.convert.Jsr310Converters;
 import com.priscilapanzuto.minhasfinancas.model.enums.StatusLancamento;
 import com.priscilapanzuto.minhasfinancas.model.enums.TipoLancamento;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "lancamento", schema = "financas")
 public class Lancamento {
 	
@@ -45,7 +49,7 @@ public class Lancamento {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
-	private Usuario ususario;
+	private Usuario usuario;
 	
 	@Column(name = "valor")
 	private BigDecimal valor;
