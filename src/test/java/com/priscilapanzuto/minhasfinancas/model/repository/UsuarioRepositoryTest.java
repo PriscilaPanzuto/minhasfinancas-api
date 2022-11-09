@@ -1,6 +1,6 @@
 package com.priscilapanzuto.minhasfinancas.model.repository;
 
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class UsuarioRepositoryTest {
 		
 		boolean result = repository.existsByEmail("usuario@email.com");
 		
-		Assertions.assertThat(result).isTrue();
+		assertThat(result).isTrue();
 	
 		
 	}
@@ -43,7 +43,7 @@ public class UsuarioRepositoryTest {
 		
 		boolean result = repository.existsByEmail("usuario@email.com");
 		
-		Assertions.assertThat(result).isFalse();
+		assertThat(result).isFalse();
 	}
 	
 	@Test
@@ -55,7 +55,7 @@ public class UsuarioRepositoryTest {
 		entityManager.persist(usuarioSalvo);
 		
 		//verificacao
-		Assertions.assertThat(usuarioSalvo.getId()).isNotNull();
+		assertThat(usuarioSalvo.getId()).isNotNull();
 	}
 	
 	@Test
@@ -67,13 +67,13 @@ public class UsuarioRepositoryTest {
 		entityManager.persist(usuarioSalvo);
 		
 		//verificacao
-		Assertions.assertThat(repository.findByEmail("priscila@priscila.com").isPresent()).isTrue();
+		assertThat(repository.findByEmail("priscila@priscila.com").isPresent()).isTrue();
 	}
 	
 	@Test
 	public void deveRetornarVazioQuandoNaoEncontrarUmUsuarioPorEmailNaBase() {		
 		
-		Assertions.assertThat(repository.findByEmail("priscila@priscila.com").isPresent()).isFalse();
+		assertThat(repository.findByEmail("priscila@priscila.com").isPresent()).isFalse();
 	}
 	
 	public static Usuario criarUsuario() {

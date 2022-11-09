@@ -1,17 +1,14 @@
 package com.priscilapanzuto.minhasfinancas.service;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -49,7 +46,7 @@ public class UsuarioServiceTest {
 		//Verificacao
 		assertDoesNotThrow(() -> service.autenticar(email, senha));
 		
-		Assertions.assertThat(service.autenticar(email, senha)).isNotNull();
+		assertThat(service.autenticar(email, senha)).isNotNull();
 		
 	}
 	
@@ -59,7 +56,7 @@ public class UsuarioServiceTest {
 		Mockito.when(repository.findByEmail(Mockito.anyString())).thenReturn(Optional.empty());
 		
 		Throwable exception = Assertions.catchThrowable(() -> service.autenticar("email@email.com","1234"));
-		Assertions.assertThat(exception).isInstanceOf(ErroAutenticacao.class).hasMessage("Usuário nao encontrado para o email informado.");
+		assertThat(exception).isInstanceOf(ErroAutenticacao.class).hasMessage("Usuário nao encontrado para o email informado.");
 	}
 	
 	@Test
@@ -71,7 +68,7 @@ public class UsuarioServiceTest {
 		Mockito.when(repository.findByEmail(Mockito.anyString())).thenReturn(Optional.of(usuario));
 		
 		Throwable exception = Assertions.catchThrowable(() -> service.autenticar("email@email.com","1234"));
-		Assertions.assertThat(exception).isInstanceOf(ErroAutenticacao.class).hasMessage("Senha inválida.");
+		assertThat(exception).isInstanceOf(ErroAutenticacao.class).hasMessage("Senha inválida.");
 	}
 	
 	@Test
@@ -95,11 +92,11 @@ public class UsuarioServiceTest {
 		Usuario usuarioSalvo = service.salvarUsuario(new Usuario());
 		
 		//verificacao
-		Assertions.assertThat(usuarioSalvo).isNotNull();
-		Assertions.assertThat(usuarioSalvo.getId()).isEqualTo(1l);
-		Assertions.assertThat(usuarioSalvo.getNome()).isEqualTo("nome");
-		Assertions.assertThat(usuarioSalvo.getEmail()).isEqualTo("email@email.com");
-		Assertions.assertThat(usuarioSalvo.getSenha()).isEqualTo("senha");
+		assertThat(usuarioSalvo).isNotNull();
+		assertThat(usuarioSalvo.getId()).isEqualTo(1l);
+		assertThat(usuarioSalvo.getNome()).isEqualTo("nome");
+		assertThat(usuarioSalvo.getEmail()).isEqualTo("email@email.com");
+		assertThat(usuarioSalvo.getSenha()).isEqualTo("senha");
 		
 	}
 	
